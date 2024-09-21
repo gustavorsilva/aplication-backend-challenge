@@ -20,9 +20,15 @@ jobs:
     - name: Exibir diretório atual
       run: pwd
 
-    - name: Instalar dependências
+    - name: Limpar arquivos de cache Python
       run: |
-        pip install -r requirements.txt
+        find . -name "*.pyc" -delete
+        find . -type d -name "__pycache__" -exec rm -r {} +
+
+    - name: Executar testes
+      working-directory: ./fastapi-hello-world
+      run: |
+        pytest
 
     - name: Executar testes
       run: |
