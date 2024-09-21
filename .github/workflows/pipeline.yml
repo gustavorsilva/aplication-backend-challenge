@@ -29,13 +29,3 @@ jobs:
       working-directory: ./fastapi-hello-world
       run: |
         pytest
-
-    - name: Executar testes
-      run: |
-        pytest || exit_code=$?
-        if [ "$exit_code" -eq 5 ]; then
-          echo "Nenhum teste encontrado. Continuando..."
-          exit 0
-        else
-          exit $exit_code
-        fi
