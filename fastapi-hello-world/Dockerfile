@@ -2,7 +2,7 @@
 FROM python:3.9-slim
 
 # Definir o diretório de trabalho dentro do container
-WORKDIR /fastapi-hello-world
+WORKDIR /app
 
 # Copiar o arquivo requirements.txt
 COPY requirements.txt .
