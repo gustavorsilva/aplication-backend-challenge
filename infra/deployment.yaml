@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: fastapi-container
-        image: REPLACE_IMAGE_URI
+        image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         ports:
         - containerPort: 80    
