@@ -50,7 +50,14 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Listar arquivos no diretório atual
+        run: ls -la
+
+      - name: Listar arquivos no diretório 'fastapihelloworld'
+        run: ls -la fastapihelloworld
+  
       - name: Construir e enviar imagem Docker para ECR
+        working-directory: fastapihelloworld
         env:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
