@@ -49,12 +49,6 @@ jobs:
       - name: Fazer login no Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Listar arquivos no diretório atual
-        run: pwd
-
-      - name: Listar arquivos no diretório 'fastapihelloworld'
-        run: ls Dockerfile
   
       - name: Construir e enviar imagem Docker para ECR
         working-directory: fastapihelloworld
