@@ -21,7 +21,7 @@ jobs:
       run: pwd
 
     - name: Instalar dependências
-      working-directory: ./fastapi-hello-world
+      working-directory: ./fastapihelloworld
       run: |
         pip install -r requirements.txt      
 
@@ -31,7 +31,7 @@ jobs:
         find . -type d -name "__pycache__" -exec rm -r {} +
 
     - name: Executar testes
-      working-directory: ./fastapi-hello-world
+      working-directory: ./fastapihelloworld
       run: |
         pytest
 
@@ -56,7 +56,7 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./fastapi-hello-world/Dockerfile ./fastapi-hello-world
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Atualizar imagem no Kubernetes
@@ -68,6 +68,6 @@ jobs:
         run: |
           aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region ${{ secrets.AWS_REGION }}
 
-          sed -i "s|REPLACE_IMAGE_URI|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" fastapi-hello-world/k8s/deployment.yaml
+          sed -i "s|REPLACE_IMAGE_URI|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" fastapihelloworld/k8s/deployment.yaml
 
-          kubectl apply -f fastapi-hello-world/k8s/
+          kubectl apply -f fastapihelloworld/k8s/
