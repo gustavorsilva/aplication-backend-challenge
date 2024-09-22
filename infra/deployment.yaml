@@ -16,20 +16,4 @@ spec:
       - name: fastapi-container
         image: REPLACE_IMAGE_URI
         ports:
-        - containerPort: 80
-  apiVersion: v1
-  kind: ConfigMap
-  metadata:
-    name: aws-auth
-    namespace: kube-system
-  data:
-    mapRoles: |
-      - rolearn: arn:aws:iam::119739005737:user/aulaaplicacaoemnuvem
-        username: aulaaplicacaoemnuvem
-        groups:
-          - system:masters
-    mapUsers: |
-      - userarn: arn:aws:iam::119739005737:user/<USER_NAME>
-        username: aulaaplicacaoemnuvem
-        groups:
-          - system:masters        
+        - containerPort: 80    
