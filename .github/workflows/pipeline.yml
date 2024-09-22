@@ -32,6 +32,11 @@ jobs:
       run: |
         pytest
 
+    - name: Instalar kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+
     - name: Configurar Credenciais AWS
       uses: aws-actions/configure-aws-credentials@v2
       with:
