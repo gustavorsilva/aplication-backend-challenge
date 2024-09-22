@@ -65,4 +65,4 @@ jobs:
 
         sed -i "s|REPLACE_IMAGE_URI|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" infra/deployment.yaml
 
-        kubectl apply -f Infra/
+        kubectl apply -f infra/
