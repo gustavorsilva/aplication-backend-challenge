@@ -17,9 +17,6 @@ jobs:
       with:
         python-version: '3.9'
     
-    - name: Exibir diretório atual
-      run: pwd
-
     - name: Instalar dependências
       working-directory: ./fastapihelloworld
       run: |
@@ -44,8 +41,6 @@ jobs:
 
     - name: Instalar kubectl
       uses: actions/setup-kubectl@v3
-      with:
-        version: 'latest'
 
     - name: Atualizar kubeconfig
       run: |
