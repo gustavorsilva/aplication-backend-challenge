@@ -51,10 +51,10 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Listar arquivos no diretório atual
-        run: ls -la
+        run: pwd
 
       - name: Listar arquivos no diretório 'fastapihelloworld'
-        run: ls -la fastapihelloworld
+        run: ls -la dockerfile
   
       - name: Construir e enviar imagem Docker para ECR
         working-directory: fastapihelloworld
