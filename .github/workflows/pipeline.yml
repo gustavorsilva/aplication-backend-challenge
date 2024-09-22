@@ -54,6 +54,10 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
+    - name: Test kubectl connectivity
+      run: |
+        kubectl get nodes
+
     - name: Atualizar imagem no Kubernetes
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
