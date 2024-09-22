@@ -54,23 +54,20 @@ jobs:
         env:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-          IMAGE_TAG: ${{ github.sha }
+          IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./fastapi-hello-world/Dockerfile ./fastapi-hello-world
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Atualizar imagem no Kubernetes
         env:
-          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
           EKS_CLUSTER_NAME: ${{ secrets.EKS_CLUSTER_NAME }}
         run: |
-          # Configurar o kubeconfig
           aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region ${{ secrets.AWS_REGION }}
 
-          # Substituir a imagem no arquivo deployment.yaml
-          sed -i "s|REPLACE_IMAGE_URI|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" k8s/deployment.yaml
+          sed -i "s|REPLACE_IMAGE_URI|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" fastapi-hello-world/k8s/deployment.yaml
 
-          # Aplicar as configurações no cluster
-          kubectl apply -f k8s/
+          kubectl apply -f fastapi-hello-world/k8s/
