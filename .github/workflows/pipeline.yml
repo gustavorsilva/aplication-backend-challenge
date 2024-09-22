@@ -54,7 +54,7 @@ jobs:
         run: pwd
 
       - name: Listar arquivos no diretório 'fastapihelloworld'
-        run: ls -la dockerfile
+        run: ls Dockerfile
   
       - name: Construir e enviar imagem Docker para ECR
         working-directory: fastapihelloworld
