@@ -48,6 +48,7 @@ jobs:
     steps:
       - name: Checar o código
         uses: actions/checkout@v3
+        
       - name: Configurar AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -74,6 +75,9 @@ jobs:
     needs: build-and-push-ecr
 
     steps:
+      - name: Checar o código
+        uses: actions/checkout@v3
+            
       - name: Install kubectl
         uses: azure/setup-kubectl@v2.0
         with:
