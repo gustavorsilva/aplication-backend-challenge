@@ -30,7 +30,7 @@ def validate_token(token_data: Token):
     token = token_data.token
     try:
         # Decodifica o token JWT sem verificar a assinatura
-        payload = jwt.decode(token, options={"verify_signature": "falso"})
+        payload = jwt.decode(token, options={"verify_signature": False})
         
         # Verifica se há exatamente 3 claims
         if set(payload.keys()) != {"Name", "Role", "Seed"}:
