@@ -6,7 +6,7 @@ app = FastAPI()
 
 # Modelo de dados para receber o token
 class TokenValidationResponse(BaseModel):
-    token: str
+    is_valid: str
 
 # Função para verificar se um número é primo
 def is_prime(n):
