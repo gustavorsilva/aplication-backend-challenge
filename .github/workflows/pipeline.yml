@@ -41,7 +41,7 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
 
   build-and-push-ecr:
-    name: Build e Push da Imagem Docker
+    name: Build e Push para imagem docker
     runs-on: ubuntu-latest
     needs: build-and-test
 
