@@ -26,10 +26,10 @@ def is_prime(n):
 
 # Endpoint
 @app.post("/validate_token", response_model=TokenValidationResponse)
-def validate_token_endpoint(token_data: Token):
-    token = token_data.token
+def validate_token_endpoint(token: str):
+    response = validar_token(token)
     return response
-    
+
 def validar_token(token):
     try:
         # Decodifica o token JWT sem verificar a assinatura
