@@ -5,32 +5,28 @@ import jwt
 app = FastAPI()
 
 # Modelo de dados para receber o token
-class TokenValidationResponse(BaseModel):
-    is_valid: str
+class Token(BaseModel):
+    token: str
 
 # Função para verificar se um número é primo
-def is_prime(n):
-    """Função para verificar se um número é primo."""
-    if n <= 1:
-        return "falso"
-    if n <= 3:
-        return "verdadeiro"
-    if n % 2 == 0 or n % 3 == 0:
-        return "falso"
+def is_prime(num):
+    if num <= 1:
+        return False
+    if num <= 3:
+        return True
+    if num % 2 == 0 or num % 3 == 0:
+        return False
     i = 5
-    while i * i <= n:
-        if n % i == 0 or n % (i + 2) == 0:
-            return "falso"
+    while i * i <= num:
+        if num % i == 0 or num % (i + 2) == 0:
+            return False
         i += 6
-    return "verdadeiro"
+    return True
 
 # Endpoint
-@app.post("/validate_token", response_model=TokenValidationResponse)
-def validate_token_endpoint(token: str):
-    response = validar_token(token)
-    return response
-
-def validar_token(token):
+@app.post("/validate_token")
+def validate_token(token_data: Token):
+    token = token_data.token
     try:
         # Decodifica o token JWT sem verificar a assinatura
         payload = jwt.decode(token, options={"verify_signature": False})
