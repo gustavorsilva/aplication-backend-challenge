@@ -33,37 +33,37 @@ def validate_token(token_data: Token):
         
         # Verifica se há exatamente 3 claims
         if set(payload.keys()) != {"Name", "Role", "Seed"}:
-            return {"is_valid": False}
+            return {"is_valid": "falso"}
         
         # Valida o tamanho da claim Name
         name = payload.get("Name")
         if not isinstance(name, str) or len(name) > 256:
-            return {"is_valid": False}
+            return {"is_valid": "falso"}
         if any(char.isdigit() for char in name):
-            return {"is_valid": False}
+            return {"is_valid": "falso"}
         
         # Valida a claim Role
         role = payload.get("Role")
         if role not in ["Admin", "Member", "External"]:
-            return {"is_valid": False}
+            return {"is_valid": "falso"}
         
         # Valida a claim Seed
         seed = payload.get("Seed")
         
-        # converter seed para inteiro
+        # Converter seed para inteiro
         try:
             seed = int(seed)
         except (ValueError, TypeError):
-            return {"is_valid": False}
+            return {"is_valid": "falso"}
         
         if not is_prime(seed):
-            return {"is_valid": False}
+            return {"is_valid": "falso"}
         
-        # Se todas as validações passarem, retorna True
-        return {"is_valid": True}
+        # Se todas as validações passarem, retorna "verdadeiro"
+        return {"is_valid": "verdadeiro"}
     except jwt.DecodeError:
         # Se o token não puder ser decodificado
-        return {"is_valid": False}
+        return {"is_valid": "falso"}
     except Exception as e:
         # Captura outras exceções
-        return {"is_valid": False}
+        return {"is_valid": "falso"}
