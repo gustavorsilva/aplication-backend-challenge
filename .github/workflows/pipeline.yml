@@ -96,6 +96,6 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          sed -i "s|REPLACE_IMAGE_URI|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" infra/deployment.yaml
+          sed -i "s|REPLACE_IMAGE_URI|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" infra/deployeks.yaml
           kubectl apply -f infra/          
 
