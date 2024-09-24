@@ -1,5 +1,5 @@
 import pytest
-from app.main import is_prime
+from backend-challenge.main import is_prime
 
 def test_is_prime():
     # Números primos

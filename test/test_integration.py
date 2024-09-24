@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
-from app.main import app
+from backend-challenge.main import backend-challenge
 
-client = TestClient(app)
+client = TestClient(backend-challenge)
 
 def test_validate_token_valid():
     # Gerar um token válido para o teste
