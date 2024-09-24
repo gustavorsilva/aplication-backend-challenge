@@ -57,7 +57,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
   deploy-to-kubernetes:
-    name: Deploy no Kubernetes
+    name: Deploy To Kubernetes
     runs-on: ubuntu-latest
     needs: build-and-push-ecr
 
@@ -82,7 +82,7 @@ jobs:
         run: |
           aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
 
-      - name: Atualizar imagem no Kubernetes
+      - name: Atualizar imagem for Kubernetes
         env:
           ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
@@ -92,5 +92,9 @@ jobs:
 
           sed -i "s|REPLACE_IMAGE_URI|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" infra/deployeks.yaml
 
-          kubectl apply -f infra/          
+          kubectl apply -f infra/ 
+
+      - name: Endereço LoadBalancer
+        run: |
+          kubectl get service -n backendchallenge      
 
