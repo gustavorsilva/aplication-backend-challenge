@@ -9,19 +9,20 @@ class Token(BaseModel):
     token: str
 
 # Função para verificar se um número é primo
-def is_prime(num):
-    if num <= 1:
-        return False
-    if num <= 3:
-        return True
-    if num % 2 == 0 or num % 3 == 0:
-        return False
+def is_prime(n):
+    """Função para verificar se um número é primo."""
+    if n <= 1:
+        return "falso"
+    if n <= 3:
+        return "verdadeiro"
+    if n % 2 == 0 or n % 3 == 0:
+        return "falso"
     i = 5
-    while i * i <= num:
-        if num % i == 0 or num % (i + 2) == 0:
-            return False
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return "falso"
         i += 6
-    return True
+    return "verdadeiro"
 
 # Endpoint
 @app.post("/validate_token")
