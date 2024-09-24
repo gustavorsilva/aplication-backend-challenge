@@ -97,6 +97,9 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER_NAME }} --region ${{ secrets.AWS_REGION }}
+
           sed -i "s|REPLACE_IMAGE_URI|$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG|g" infra/deployeks.yaml
+          
           kubectl apply -f infra/          
 
