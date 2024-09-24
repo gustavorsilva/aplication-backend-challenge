@@ -17,7 +17,7 @@ def test_validate_token_valid():
 
     response = client.post("/validate_token", json={"token": token})
     assert response.status_code == 200
-    assert response.json() == {"is_valid": True}
+    assert response.json() == {"is_valid": "verdadeiro"}
 
 def test_validate_token_invalid_name():
     # Token com Name inválido (contém números)
@@ -33,7 +33,7 @@ def test_validate_token_invalid_name():
 
     response = client.post("/validate_token", json={"token": token})
     assert response.status_code == 200
-    assert response.json() == {"is_valid": False}
+    assert response.json() == {"is_valid": "falso"}
 
 def test_validate_token_invalid_role():
     # Token com Role inválido
@@ -49,7 +49,7 @@ def test_validate_token_invalid_role():
 
     response = client.post("/validate_token", json={"token": token})
     assert response.status_code == 200
-    assert response.json() == {"is_valid": False}
+    assert response.json() == {"is_valid": "falso"}
 
 def test_validate_token_invalid_seed():
     # Token com Seed não primo
@@ -65,7 +65,7 @@ def test_validate_token_invalid_seed():
 
     response = client.post("/validate_token", json={"token": token})
     assert response.status_code == 200
-    assert response.json() == {"is_valid": False}
+    assert response.json() == {"is_valid": "falso"}
 
 def test_validate_token_missing_claims():
     # Token com claims faltando
@@ -81,7 +81,7 @@ def test_validate_token_missing_claims():
 
     response = client.post("/validate_token", json={"token": token})
     assert response.status_code == 200
-    assert response.json() == {"is_valid": False}
+    assert response.json() == {"is_valid": "falso"}
 
 def test_validate_token_extra_claims():
     # Token com claims extras
@@ -98,7 +98,7 @@ def test_validate_token_extra_claims():
 
     response = client.post("/validate_token", json={"token": token})
     assert response.status_code == 200
-    assert response.json() == {"is_valid": False}
+    assert response.json() == {"is_valid": "falso"}
 
 def test_validate_token_invalid_token():
     # Token inválido (não é um JWT)
@@ -106,4 +106,4 @@ def test_validate_token_invalid_token():
 
     response = client.post("/validate_token", json={"token": token})
     assert response.status_code == 200
-    assert response.json() == {"is_valid": False}
+    assert response.json() == {"is_valid": "falso"}
