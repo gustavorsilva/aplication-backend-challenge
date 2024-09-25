@@ -1,6 +1,19 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import jwt
+import logging
+
+# Configuração básica do logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.StreamHandler()
+    ]
+)
+
+# Logger para o aplicativo
+logger = logging.getLogger("app")
 
 app = FastAPI()
 
@@ -30,10 +43,12 @@ def validate_token(token_data: Token):
     try:
         # Decodifica o token JWT sem verificar a assinatura
         payload = jwt.decode(token, options={"verify_signature": False})
+        logger.debug(f"Payload decodificado: {payload}")
         
         # Verifica se há exatamente 3 claims
         if set(payload.keys()) != {"Name", "Role", "Seed"}:
             return {"is_valid": "falso"}
+        
         
         # Valida o tamanho da claim Name
         name = payload.get("Name")
@@ -53,17 +68,22 @@ def validate_token(token_data: Token):
         # Converter seed para inteiro
         try:
             seed = int(seed)
+            logger.debug(f"Claim 'Seed' convertida para inteiro: {seed}")
         except (ValueError, TypeError):
+            logger.warning("A claim 'Seed' não pôde ser convertida para inteiro.")
             return {"is_valid": "falso"}
         
         if not is_prime(seed):
+            logger.warning("A claim 'Seed' não é um número primo.")
             return {"is_valid": "falso"}
         
+        logger.info("Token válido.")
         # Se todas as validações passarem, retorna "verdadeiro"
         return {"is_valid": "verdadeiro"}
+    
     except jwt.DecodeError:
-        # Se o token não puder ser decodificado
+        logger.error("Falha ao decodificar o token JWT.")
         return {"is_valid": "falso"}
     except Exception as e:
-        # Captura outras exceções
+        logger.exception(f"Ocorreu um erro inesperado: {e}")
         return {"is_valid": "falso"}
