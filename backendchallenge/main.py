@@ -47,7 +47,7 @@ def validate_token(token_data: Token):
 
         # Verifica se há mais de 3 claims
         if len(payload) > 3:
-            logger.warning("Abrindo o JWT, foi encontrado mais de 3 claims.")
+            logger.error("Abrindo o JWT, foi encontrado mais de 3 claims.")
             return {"is_valid": "falso"}
 
         # Verifica se há exatamente 3 claims
@@ -57,10 +57,10 @@ def validate_token(token_data: Token):
         #Valida o tamanho da claim Name
         name = payload.get("Name")
         if not isinstance(name, str) or len(name) > 256:
-            logger.warning("A claim 'Name é inválida' verificar tipo ou tamanho).")
+            logger.error("A claim 'Name é inválida' verificar tipo ou tamanho).")
             return {"is_valid": "falso"}
         if any(char.isdigit() for char in name):
-            logger.warning("Abrindo o JWT, a Claim Name possui caracter de números.")
+            logger.error("Abrindo o JWT, a Claim Name possui caracter de números.")
             return {"is_valid": "falso"}        
         
         # Valida a claim Seed
@@ -69,7 +69,7 @@ def validate_token(token_data: Token):
         # Valida a claim Role
         role = payload.get("Role")
         if role not in ["Admin", "Member", "External"]:
-            logger.warning("A claim 'Role' contém um valor inválido.")
+            logger.error("A claim 'Role' contém um valor inválido.")
             return {"is_valid": "falso"}
         
         # Converter seed para inteiro
@@ -77,11 +77,11 @@ def validate_token(token_data: Token):
             seed = int(seed)
             logger.debug(f"Claim 'Seed' convertida para inteiro: {seed}")
         except (ValueError, TypeError):
-            logger.warning("A claim 'Seed' não pôde ser convertida para inteiro.")
+            logger.error("A claim 'Seed' não pôde ser convertida para inteiro.")
             return {"is_valid": "falso"}
         
         if not is_prime(seed):
-            logger.warning("A claim 'Seed' não é um número primo.")
+            logger.error("A claim 'Seed' não é um número primo.")
             return {"is_valid": "falso"}
         
         logger.info("Token válido.")
