@@ -121,3 +121,31 @@ curl -X POST "http://127.0.0.1:80/validate_token" \
 ## Níveis de log utilizados:
 - INFO: Informações gerais sobre o funcionamento da aplicação.
 - ERROR: Erros na validação do token.
+
+## CI/CD
+Este repositório utiliza uma pipeline de CI/CD implementada com GitHub Actions para automatizar o processo de integração, teste, construção e implantação da aplicação. A seguir, descrevemos detalhadamente como a pipeline está configurada e como cada etapa funciona.
+
+# Configuração Manifesto Kubernetes
+na rota infra/deployeks.yaml construido o manifesto Kubernetes que tem se o deplolyment e o service a onde é disponivel o url do load balancer para requisição da API.
+
+# Jobs Pipeline
+![alt text](imagereadme/esteira.png)
+
+1. Build and Test
+Este job é responsável por compilar o código, instalar as dependências e executar os testes automatizados.
+
+2. Build and Push to ECR
+Este job constrói a imagem Docker da aplicação e a envia para o Amazon Elastic Container Registry (ECR).
+
+3. Deploy to Kubernetes
+Este job realiza a implantação da aplicação no cluster Kubernetes utilizando o Amazon EKS.
+
+# Segredos e Configurações
+Para que a pipeline funcione corretamente, é necessário configurar os seguintes segredos no repositório do GitHub:
+
+- AWS_ACCESS_KEY_ID:.
+- AWS_SECRET_ACCESS_KEY:
+- AWS_REGION:
+- ECR_REPOSITORY: Nome do repositório no Amazon ECR onde as imagens Docker serão armazenadas.
+- ECR_REGISTRY: URI do Amazon ECR. Exemplo: numerodacontaaws.dkr.ecr.regiao.amazonaws.com
+- EKS_CLUSTER_NAME: Nome do cluster Amazon EKS onde a aplicação será implantada.
