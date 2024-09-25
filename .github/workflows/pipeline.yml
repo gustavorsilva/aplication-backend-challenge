@@ -94,11 +94,11 @@ jobs:
 
           kubectl apply -f infra/ 
 
-      - name: Endereço LoadBalancer
+      - name: Endereço Load Balancer
         run: |
           kubectl get service -n backendchallenge    
 
-      - name: Endereço Kibana
+      - name: Endereco Kibana
         run: |
            kubectl get service kibana-logging -n efklog
 

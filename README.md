@@ -180,4 +180,12 @@ curl -X POST "http://http://http://a3cd5c4765f8a41399d1769fa1ca78b3-112773827.us
 -H "Content-Type: application/json" \
 -d '{"token": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiTWVtYmVyIiwiT3JnIjoiQlIiLCJTZWVkIjoiMTQ2MjciLCJOYW1lIjoiVmFsZGlyIEFyYW5oYSJ9.cmrXV_Flm5mfdpfNUVopY_I2zeJUy4EZ4i3Fea98zvY"}'
 ```
+Acessando a Insomnia no parametro { "token": "informe sua chave"} exemplo:
+
+
+
+## Repositorios Infraestrutura
+# Criação do EKS: [Link do Repositorio](https://github.com/gustavorsilva/backend-challenge-infra)
+
+# Criação do ECR: [Link do Repositorio](https://github.com/gustavorsilva/backend-challenge-infra/tree/OpenTerraform)
 
