@@ -58,3 +58,4 @@ tambem pode ser validado utlizando ferramentas como (insomnia ou postman).
 
 ## Como Utilizar localmente Insomnia ou outras ferramentas para execução de teste de api
 - Insira o Curl completo na na URL clique em import, em seguida clique em send. Sua aplicação vai responder ao token
+![Animação](https://github.com/user-attachments/assets/77b5fc61-e4ee-4e31-b842-d6af97d1b786)
