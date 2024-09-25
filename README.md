@@ -174,7 +174,7 @@ http://http://a3cd5c4765f8a41399d1769fa1ca78b3-112773827.us-east-1.elb.amazonaws
 Acessando a URL no parametro { "token": "informe sua chave"} exemplo:
 ![alt text](imagereadme/urlexterno.png)
 
-- Via Insomnia ou outras Ferramentas voce pode executar seguindo o exemplo:
+- Via Insomnia ou outras Ferramentas voce pode executar seguindo o Exemplo:
 ```bash
 curl -X POST "http://http://http://a3cd5c4765f8a41399d1769fa1ca78b3-112773827.us-east-1.elb.amazonaws.com/validate_token" \
 -H "Content-Type: application/json" \
