@@ -1,6 +1,6 @@
 ## Projeto backend-challenge: Validador de Tokens JWT com FastAPI
 ## Descrição
-Este projeto é uma API desenvolvida com FastAPI para validar tokens JWT. A API verifica a estrutura e o conteúdo do token, garantindo que ele contenha exatamente três claims: Name, Role e Seed. Além disso, realiza validações específicas para cada claim, como o tamanho do nome de ate 256 caracteres e formato do Name no qual não pode ter números, a integridade do Role e a Seed no qual valida se é número Primo.
+Este projeto é uma API desenvolvida com FastAPI para validar tokens JWT. A API verifica a estrutura e o conteúdo do token, garantindo que ele contenha exatamente três claims: Name, Role e Seed. Além disso, realiza validações específicas para cada claim, como o tamanho do nome de ate 256 caracteres e formato do Name no qual não pode ter números e por final o seed no qual deve ser um número primo.
 Recomendando esta na versão do Python 3.9 ou seperior [Link da biblioteca python](https://docs.python.org/3.9/)
 
 ## Instalação e Execução de aplicação
@@ -78,12 +78,14 @@ Parâmetros
 }
 ```
 # Respostas
-- 200 OK quanto para verdadeiro e falso o resto das informações estão no log da aplicação
+- Status Code:200(OK)  quanto para verdadeiro ou para falso, o restante das informações estão no log da aplicação,
 ```json
 {
   "is_valid": "verdadeiro"
 }
-e
+```
+ou
+```json
 {
   "is_valid": "falso"
 }
@@ -122,23 +124,32 @@ curl -X POST "http://127.0.0.1:80/validate_token" \
 - INFO: Informações gerais sobre o funcionamento da aplicação.
 - ERROR: Erros na validação do token.
 
+## LOGS
+- Foi utlizado o EKL (Elasticsearch, Kibana & Logstash) para coletar os Logging da aplicação e Monitoring
+![alt text](imagereadme/ekl.png)
+
+
 ## CI/CD
 Este repositório utiliza uma pipeline de CI/CD implementada com GitHub Actions para automatizar o processo de integração, teste, construção e implantação da aplicação. A seguir, descrevemos detalhadamente como a pipeline está configurada e como cada etapa funciona.
 
 # Configuração Manifesto Kubernetes
-na rota infra/deployeks.yaml construido o manifesto Kubernetes que tem se o deplolyment e o service a onde é disponivel o url do load balancer para requisição da API.
+Na rota infra/deployeks.yaml construido o manifesto Kubernetes que tem o deplolyment e o service.
 
 # Jobs Pipeline
 ![alt text](imagereadme/esteira.png)
 
-1. Build and Test
+1. Build and Test:
 Este job é responsável por compilar o código, instalar as dependências e executar os testes automatizados.
 
-2. Build and Push to ECR
+2. Build and Push to ECR:
 Este job constrói a imagem Docker da aplicação e a envia para o Amazon Elastic Container Registry (ECR).
 
-3. Deploy to Kubernetes
+3. Deploy to Kubernetes:
 Este job realiza a implantação da aplicação no cluster Kubernetes utilizando o Amazon EKS.
+- Dentro dos steps vc consegue recuperar os valores dos Load Balancer quanto aplicação e Kibana, no campo *** informe a região
+us-east-1 exemplo:
+![alt text](imagereadme/loadbalancerurl.png)
+
 
 # Segredos e Configurações
 Para que a pipeline funcione corretamente, é necessário configurar os seguintes segredos no repositório do GitHub:
