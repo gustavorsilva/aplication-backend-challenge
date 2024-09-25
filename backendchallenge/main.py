@@ -52,8 +52,10 @@ def validate_token(token_data: Token):
         #Valida o tamanho da claim Name
         name = payload.get("Name")
         if not isinstance(name, str) or len(name) > 256:
+            logger.warning("A claim 'Name é inválida' verificar tipo ou tamanho).")
             return {"is_valid": "falso"}
         if any(char.isdigit() for char in name):
+            logger.warning("A claim 'Name' contém caracteres numéricos.")
             return {"is_valid": "falso"}        
         
         # Valida a claim Seed
@@ -62,6 +64,7 @@ def validate_token(token_data: Token):
         # Valida a claim Role
         role = payload.get("Role")
         if role not in ["Admin", "Member", "External"]:
+            logger.warning("A claim 'Role' contém um valor inválido.")
             return {"is_valid": "falso"}
         
         # Converter seed para inteiro
