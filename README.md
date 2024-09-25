@@ -182,7 +182,7 @@ curl -X POST "http://http://http://a3cd5c4765f8a41399d1769fa1ca78b3-112773827.us
 ```
 Acessando a Insomnia no parametro { "token": "informe sua chave"} exemplo:
 
-
+![insomniaurllb](https://github.com/user-attachments/assets/e7a9e688-867f-498a-9ca8-40cb26fa56b4)
 
 ## Repositorios Infraestrutura
 # Criação do EKS: [Link do Repositorio](https://github.com/gustavorsilva/backend-challenge-infra)
