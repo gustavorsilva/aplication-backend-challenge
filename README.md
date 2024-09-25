@@ -171,6 +171,8 @@ acesso as URL para testa API e outra para acessar os logs da API.
 Swagger UI
 http://http://a3cd5c4765f8a41399d1769fa1ca78b3-112773827.us-east-1.elb.amazonaws.com/docs
 ```
+Acessando a URL no parametro { "token": "informe sua chave"} exemplo:
+![alt text](imagereadme/urlexterno.png)
 
 - Via Insomnia ou outras Ferramentas voce pode executar seguindo o exemplo:
 ```bash
@@ -178,3 +180,4 @@ curl -X POST "http://http://http://a3cd5c4765f8a41399d1769fa1ca78b3-112773827.us
 -H "Content-Type: application/json" \
 -d '{"token": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiTWVtYmVyIiwiT3JnIjoiQlIiLCJTZWVkIjoiMTQ2MjciLCJOYW1lIjoiVmFsZGlyIEFyYW5oYSJ9.cmrXV_Flm5mfdpfNUVopY_I2zeJUy4EZ4i3Fea98zvY"}'
 ```
+
