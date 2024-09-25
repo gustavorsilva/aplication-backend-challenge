@@ -160,3 +160,21 @@ Para que a pipeline funcione corretamente, é necessário configurar os seguinte
 - ECR_REPOSITORY: Nome do repositório no Amazon ECR onde as imagens Docker serão armazenadas.
 - ECR_REGISTRY: URI do Amazon ECR. Exemplo: numerodacontaaws.dkr.ecr.regiao.amazonaws.com
 - EKS_CLUSTER_NAME: Nome do cluster Amazon EKS onde a aplicação será implantada.
+
+# Acessando a API após publicação no Kubernetes
+- Acessando a pipeline acessando o workflow Deploy-To-Kubernetes no step "Endereço Load Balancar e Endereço Kibana" você tera
+acesso as URL para testa API e outra para acessar os logs da API.
+
+# Como realizar as chamadas:
+- Via Browser vc pode jogar a URL do Load Balancar com a porta configurada. Exemplo:
+```bash 
+Swagger UI
+http://http://a3cd5c4765f8a41399d1769fa1ca78b3-112773827.us-east-1.elb.amazonaws.com/docs
+```
+
+- Via Insomnia ou outras Ferramentas voce pode executar seguindo o exemplo:
+```bash
+curl -X POST "http://http://http://a3cd5c4765f8a41399d1769fa1ca78b3-112773827.us-east-1.elb.amazonaws.com/validate_token" \
+-H "Content-Type: application/json" \
+-d '{"token": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiTWVtYmVyIiwiT3JnIjoiQlIiLCJTZWVkIjoiMTQ2MjciLCJOYW1lIjoiVmFsZGlyIEFyYW5oYSJ9.cmrXV_Flm5mfdpfNUVopY_I2zeJUy4EZ4i3Fea98zvY"}'
+```
