@@ -96,5 +96,9 @@ jobs:
 
       - name: Endereço LoadBalancer
         run: |
-          kubectl get service -n backendchallenge      
+          kubectl get service -n backendchallenge    
+
+      - name: Endereço Kibana
+        run: |
+            get service kibana-logging -n efklog
 
