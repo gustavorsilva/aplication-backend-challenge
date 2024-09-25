@@ -78,7 +78,7 @@ Parâmetros
 }
 ```
 # Respostas
-- Status Code:200(OK)  quanto para verdadeiro ou para falso, o restante das informações estão no log da aplicação,
+- Status Code:200(OK)  quando para verdadeiro ou para falso. O restante das informações estão no log da aplicação.
 ```json
 {
   "is_valid": "verdadeiro"
