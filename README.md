@@ -21,8 +21,10 @@ source venv/bin/activate
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
+## Uso
 em seguida a aplicação esta disponivel no browser no endereço:
 ```bash 
+Swagger UI
 http://127.0.0.1:8000/docs
 ```
  ou prompt de comando:
@@ -46,8 +48,10 @@ em seguida execute o comando sera montado a imagem no docker desktop:
 ```bash
 docker run -d --name jwt-api -p 80:80 jwt-api 
 ```
+## Uso
 Com sua imagem ja sendo executado localmente, pode ser acessada localmente utilizando no browser no endereço:
 ```bash 
+Swagger UI
 http://127.0.0.1:80/docs
 ```
 ou prompt de comando:
@@ -59,3 +63,58 @@ tambem pode ser validado utlizando ferramentas como (insomnia ou postman).
 ## Como Utilizar localmente Insomnia ou outras ferramentas para execução de teste de api
 - Insira o Curl completo na na URL clique em import, em seguida clique em send. Sua aplicação vai responder ao token
 ![Animação](https://github.com/user-attachments/assets/77b5fc61-e4ee-4e31-b842-d6af97d1b786)
+
+## Endpoints da API
+ ```bash
+POST /validate_token
+```
+Valida um token JWT enviado no corpo da requisição.
+
+Parâmetros
+- Body: JSON contendo o token a ser validado.
+```bash
+{
+  "token": "seu_token_jwt_aqui"
+}
+```
+# Respostas
+- 200 OK quanto para verdadeiro e falso o resto das informações estão no log da aplicação
+```json
+{
+  "is_valid": "verdadeiro"
+}
+e
+{
+  "is_valid": "falso"
+}
+```
+## Exemplo de Requisição Válida
+```bash
+curl -X POST "http://127.0.0.1:80/validate_token" \
+-H "Content-Type: application/json" \
+-d '{"token": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJTZWVkIjoiNzg0MSIsIk5hbWUiOiJUb25pbmhvIEFyYXVqbyJ9.QY05sIjtrcJnP533kQNk8QXcaleJ1Q01jWY_ZzIZuAg"}'
+```
+- Resposta
+```bash
+{
+  "is_valid": "verdadeiro"
+}
+```
+- Log
+![alt text](image.png)
+
+## Exemplo de Requisição Invalida
+```bash
+curl -X POST "http://127.0.0.1:80/validate_token" \
+-H "Content-Type: application/json" \
+-d '{"token": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiTWVtYmVyIiwiT3JnIjoiQlIiLCJTZWVkIjoiMTQ2MjciLCJOYW1lIjoiVmFsZGlyIEFyYW5oYSJ9.cmrXV_Flm5mfdpfNUVopY_I2zeJUy4EZ4i3Fea98zvY"}'
+```
+- Resposta
+```bash
+{
+  "is_valid": "falso"
+}
+```
+- Log
+![alt text](image-1.png)
+
