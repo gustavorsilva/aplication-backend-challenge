@@ -101,7 +101,7 @@ curl -X POST "http://127.0.0.1:80/validate_token" \
 }
 ```
 - Log
-![alt text](image.png)
+![alt text](imagereadme/image.png)
 
 ## Exemplo de Requisição Invalida
 ```bash
@@ -116,5 +116,8 @@ curl -X POST "http://127.0.0.1:80/validate_token" \
 }
 ```
 - Log
-![alt text](image-1.png)
+![alt text](imagereadme/image-1.png)
 
+## Níveis de log utilizados:
+- INFO: Informações gerais sobre o funcionamento da aplicação.
+- ERROR: Erros na validação do token.
