@@ -103,7 +103,7 @@ curl -X POST "http://127.0.0.1:80/validate_token" \
 }
 ```
 - Log
-![alt text](imagereadme/image.png)
+![alt text](imagereadme/imagem-2.png)
 
 ## Exemplo de Requisição Invalida
 ```bash
