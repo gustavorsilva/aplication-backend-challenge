@@ -150,7 +150,6 @@ Este job realiza a implantação da aplicação no cluster Kubernetes utilizando
 us-east-1 exemplo:
 ![alt text](imagereadme/loadbalancerurl.png)
 
-
 # Segredos e Configurações
 Para que a pipeline funcione corretamente, é necessário configurar os seguintes segredos no repositório do GitHub:
 
