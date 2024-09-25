@@ -44,26 +44,25 @@ def validate_token(token_data: Token):
         # Decodifica o token JWT sem verificar a assinatura
         payload = jwt.decode(token, options={"verify_signature": False})
         logger.debug(f"Payload decodificado: {payload}")
-        
+
         # Verifica se há exatamente 3 claims
         if set(payload.keys()) != {"Name", "Role", "Seed"}:
             return {"is_valid": "falso"}
-        
-        
-        # Valida o tamanho da claim Name
+    
+        #Valida o tamanho da claim Name
         name = payload.get("Name")
         if not isinstance(name, str) or len(name) > 256:
             return {"is_valid": "falso"}
         if any(char.isdigit() for char in name):
-            return {"is_valid": "falso"}
+            return {"is_valid": "falso"}        
         
+        # Valida a claim Seed
+        seed = payload.get("Seed")
+
         # Valida a claim Role
         role = payload.get("Role")
         if role not in ["Admin", "Member", "External"]:
             return {"is_valid": "falso"}
-        
-        # Valida a claim Seed
-        seed = payload.get("Seed")
         
         # Converter seed para inteiro
         try:
