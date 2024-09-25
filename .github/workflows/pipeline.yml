@@ -100,5 +100,5 @@ jobs:
 
       - name: Endereço Kibana
         run: |
-            get service kibana-logging -n efklog
+           kubectl get service kibana-logging -n efklog
 
