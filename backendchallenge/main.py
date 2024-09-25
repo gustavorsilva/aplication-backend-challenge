@@ -45,6 +45,11 @@ def validate_token(token_data: Token):
         payload = jwt.decode(token, options={"verify_signature": False})
         logger.debug(f"Payload decodificado: {payload}")
 
+        # Verifica se há mais de 3 claims
+        if len(payload) > 3:
+            logger.warning("Abrindo o JWT, foi encontrado mais de 3 claims.")
+            return {"is_valid": "falso"}
+
         # Verifica se há exatamente 3 claims
         if set(payload.keys()) != {"Name", "Role", "Seed"}:
             return {"is_valid": "falso"}
@@ -55,7 +60,7 @@ def validate_token(token_data: Token):
             logger.warning("A claim 'Name é inválida' verificar tipo ou tamanho).")
             return {"is_valid": "falso"}
         if any(char.isdigit() for char in name):
-            logger.warning("A claim 'Name' contém caracteres numéricos.")
+            logger.warning("Abrindo o JWT, a Claim Name possui caracter de números.")
             return {"is_valid": "falso"}        
         
         # Valida a claim Seed
@@ -84,7 +89,7 @@ def validate_token(token_data: Token):
         return {"is_valid": "verdadeiro"}
     
     except jwt.DecodeError:
-        logger.error("Falha ao decodificar o token JWT.")
+        logger.error("JWT invalido.")
         return {"is_valid": "falso"}
     except Exception as e:
         logger.exception(f"Ocorreu um erro inesperado: {e}")
